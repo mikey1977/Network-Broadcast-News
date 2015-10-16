@@ -26,16 +26,17 @@ var server = net.createServer(function(socket) {
       if (sockets[i] === socket) continue;
       sockets[i].write(data.toString());
 
-      process.stdout.write(socket.remoteAddress + ':' + socket.remotePort + ': ' + data);
-      console.log('SERVER BCAST FROM ' + socket.remoteAddress + ':' + socket.remotePort + ':' + data);
-      socket.write(socket.remoteAddress + ':' + socket.remotePort + ': ' + data);
+      process.stdout.write('SERVER BCAST FROM ' + socket.remoteAddress + ':' + socket.remotePort + ' : ' + data);
+      // console.log('SERVER BCAST FROM ' + socket.remoteAddress + ':' + socket.remotePort + ': ' + data);
+      // socket.write(socket.remoteAddress + ':' + socket.remotePort + ': ' + data);
     }
   });
 
   socket.on('end', function() {
     var i = sockets.indexOf(socket);
+    // console.log(socket);
+    console.log('CLOSED: ' + socket._peername.address + ':' + socket._peername.port);
     sockets.remove(i);
-    console.log('CLOSED: ');
   });
 
   // socket.on('CLOSED', function(data) {

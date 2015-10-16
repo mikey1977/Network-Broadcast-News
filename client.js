@@ -8,8 +8,8 @@ client.connect(portName, hostAddress, function() {
 
   //as data comes in on stdin
   process.stdin.on('data', function(data) {
-
-    //client writes to server
+    // console.log('sent: ' + data);
+    //client writes to server, received by other sockets
     client.write(data);
   });
 });

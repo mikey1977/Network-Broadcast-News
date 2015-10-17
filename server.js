@@ -24,7 +24,7 @@ var server = net.createServer(function(socket) {
     //loop through sockets array
     for (var i = 0; i < sockets.length; i++) {
       if (sockets[i] === socket) continue;
-      sockets[i].write(data.toString());
+      sockets[i].write(socket.remoteAddress + ':' + socket.remotePort + ': ' + data.toString());
 
       process.stdout.write('SERVER BCAST FROM ' + socket.remoteAddress + ':' + socket.remotePort + ' : ' + data);
       // console.log('SERVER BCAST FROM ' + socket.remoteAddress + ':' + socket.remotePort + ': ' + data);

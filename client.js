@@ -4,8 +4,9 @@ var portName = 6969;
 
 var client = new net.Socket();
 client.connect(portName, hostAddress, function() {
-  console.log('CONNECTED: ' + hostAddress + ':' + portName);
-
+  console.log('CONNECTED: ' + client.localAddress + ':' + client.localPort);
+  // console.log(client.localAddress + client.localPort);
+  console.log('server' + client.remoteAddress + client.remotePort);
   //as data comes in on stdin
   process.stdin.on('data', function(data) {
     // console.log('sent: ' + data);
@@ -20,7 +21,7 @@ client.on('data', function(data) {
   //figure out how to write to socket
   // process.stdin.on('data', data);
 
-  console.log('Received: ' + data);
+  console.log(data.toString());
 });
 
 // close event handler

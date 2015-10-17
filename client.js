@@ -1,17 +1,23 @@
 var net = require('net');
 var hostAddress = '0.0.0.0';
 var portName = 6969;
+var prompt = require('prompt');
+
+
 
 var client = new net.Socket();
 client.connect(portName, hostAddress, function() {
+
+
+  // console.log('server listening on ' + client.remoteAddress + client.remotePort);
   console.log('CONNECTED: ' + client.localAddress + ':' + client.localPort);
   // console.log(client.localAddress + client.localPort);
-  console.log('server' + client.remoteAddress + client.remotePort);
   //as data comes in on stdin
   process.stdin.on('data', function(data) {
-    // console.log('sent: ' + data);
+    console.log(client.localAddress + ':' + client.localPort + ': ' + data);
     //client writes to server, received by other sockets
     client.write(data);
+
   });
 });
 

@@ -2,6 +2,14 @@ var net = require('net');
 var hostAddress = '0.0.0.0';
 var portName = 6969;
 var sockets = [];
+// var prompt = require('prompt');
+
+// prompt.start();
+
+// prompt.get(['username'], function(err, result) {
+//   console.log(' username: ' + result.username);
+// })
+
 //create server and connection listener
 
 //socket can be saved to collection
@@ -14,16 +22,22 @@ Array.prototype.remove = function(from, to) {
 
 var server = net.createServer(function(socket) {
 
+
   //push new sockets into array
   sockets.push(socket);
 
   //goes to server
+  console.log('Server listening on ' + socket.localAddress + ':' + socket.localPort);
   console.log('CONNECTED: ' + socket.remoteAddress + ':' + socket.remotePort);
   socket.on('data', function(data) {
 
     //loop through sockets array
     for (var i = 0; i < sockets.length; i++) {
       if (sockets[i] === socket) continue;
+
+    console.log(socket._handle.fd);
+
+      //writes to clients
       sockets[i].write(socket.remoteAddress + ':' + socket.remotePort + ': ' + data.toString());
 
       process.stdout.write('SERVER BCAST FROM ' + socket.remoteAddress + ':' + socket.remotePort + ' : ' + data);

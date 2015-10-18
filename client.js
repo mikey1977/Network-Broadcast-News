@@ -13,6 +13,8 @@ client.connect(portName, hostAddress, function() {
   console.log('CONNECTED: ' + client.localAddress + ':' + client.localPort);
   // console.log(client.localAddress + client.localPort);
   //as data comes in on stdin
+  // client.write('Mike:poundbutt');
+
   process.stdin.on('data', function(data) {
     console.log(client.localAddress + ':' + client.localPort + ': ' + data);
     //client writes to server, received by other sockets
